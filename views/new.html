@@ -1,0 +1,35 @@
+<!-- new.html -->
+<!-- <div class='row'>
+	<a ui-sref ="app.home">Go back</a>
+</div> -->
+<!-- <div>
+Number
+	{{info}}
+</div> -->
+<h2>{{editting.mainTitle}}</h2>
+<div class ='row'>
+	<div class ='col-xs-12'>
+		<form name = "itemForm">
+			<div class ='form-group'>
+				<input type="text" class ="form-control" placeholder="Heading" ng-model="item.heading">
+			</div>
+			<div class = 'form-group'>
+				<input type ="text" class ="form-control" placeholder="Sub-Heading" ng-model="item.subheading">
+			</div>
+			<div class ='form-group'>
+				<input type = 'text' class ='form-control' placeholder="info" ng-model='item.info'></input>
+			</div>
+			<div class='form-group'>
+				<button type = 'button' class ='btn btn-success btn-lg btn-block' ng-click='save()'>
+					<span class ='glyphicon glyphicon-ok'></span>
+					Save
+				</button>
+			</div>
+			<div class='form-group'>
+				<a ui-sref='app.home' class='btn btn-default btn-lg btn-block'>
+					<span class ='glyphicon glyphicon-remove'>Cancel</span>
+				</a>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,31 @@
+<!-- home.html -->
+
+
+<div class="row">
+        <div class="col-xs-12">
+
+          <ul class="list-group">
+            <li class="list-group-item text-center" ng-repeat="item in department.admin track by $index">
+              {{item.mainTitle}}
+        
+              <button type="button" class="btn btn-danger btn-s pull-right btn-separation-left"><span class="glyphicon glyphicon-trash"> </span></button>        
+              <a ui-sref="app.edit({id:$index})" class="btn btn-primary btn-s pull-right"><span class="glyphicon glyphicon-pencil"></span></a>
+            </li>
+          </ul>   
+        </div>
+  </div>
+  <form name="titleForm">
+    <div class = 'form-group'>
+      New Item title
+      <input type="text" class = 'form-control' placeholder='Title' ng-model='newItem'>
+    </div>
+  </form>
+  <div class= "row">
+  <div class ="col-xs-12" button-row>
+    <a class = "btn btn-success btn-lg">
+      <span class="glyphicon glyphicon-plus" ng-click="addNew()"> Add new item</span></a>
+  </div>
+</div>
+<div>
+  <pre>  {{json | prettyJSON }}</pre>
+</div>
