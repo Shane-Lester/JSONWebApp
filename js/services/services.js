@@ -51,6 +51,23 @@ angular.module('JSONApp')
 		return newTitle;
 	}
 
+	service.download= function(){
+		//from http://stackoverflow.com/questions/16329293/save-json-string-to-client-pc-using-html5-api
+		console.log('service.download function');
+		var data = service.entries;
+		var json = JSON.stringify(data);
+		var blob = new Blob([json], {type: "application/json"});
+		var url  = URL.createObjectURL(blob);
+
+		var a = document.createElement('a');
+		a.download    = "department.json";
+		a.href        = url;
+		a.textContent = "Download backup.json";
+		
+		return a;
+
+	}
+
 
 	return service;
 })

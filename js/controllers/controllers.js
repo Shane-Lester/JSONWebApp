@@ -23,6 +23,11 @@ angular.module('JSONApp')
 		}
 	$scope.json = Items.entries;
 
+	$scope.download = function(){
+		 var a=Items.download();
+		 $('#target').html(a);
+
+			}
 
 }])
 
