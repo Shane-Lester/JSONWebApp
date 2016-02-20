@@ -58,6 +58,17 @@ angular.module('JSONApp')
 		service.entries.admin.splice(index,1);
 	}
 
+	service.move = function(index, direction){
+		var moveItem ={};
+		// console.log(index);
+		//if direction is -1 move up in array +1 move down- gives an array so take object 0
+		
+		moveItem =service.entries.admin.splice(index,1)[0];
+		// console.log(moveItem);
+
+		service.entries.admin.splice(index+direction,0,moveItem);
+	}
+
 	service.download= function(){
 		//from http://stackoverflow.com/questions/16329293/save-json-string-to-client-pc-using-html5-api
 		// console.log('service.download function');

@@ -36,6 +36,15 @@ angular.module('JSONApp')
 		Items.remove(index);
 	}
 
+	$scope.moveUp = function(index){
+		//if second argument -1 move it up in the array
+		Items.move(index,-1);
+	}
+
+	$scope.moveDown = function(index){
+		//if second argument +1 move it down in the array
+		Items.move(index,+1);
+	}
 
 }])
 

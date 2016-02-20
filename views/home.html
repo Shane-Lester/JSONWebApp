@@ -6,8 +6,11 @@
 
           <ul class="list-group">
             <li class="list-group-item text-center" ng-repeat="item in department.admin track by $index">
+
+            <button class="btn btn-s pull-left" ng-click="moveUp($index)"><span class=" glyphicon glyphicon-arrow-up  "> </span></button>
               {{item.title}}
-        
+            <button class="btn btn-s btn-separation-left pull-right" ng-click="moveDown($index)"> <span class="glyphicon glyphicon-arrow-down "></span></button>
+
               <button type="button" class="btn btn-danger btn-s pull-right btn-separation-left"ng-click="remove($index)" ><span class="glyphicon glyphicon-trash"> </span></button>        
               <a ui-sref="app.edit({id:$index})" class="btn btn-primary btn-s pull-right"><span class="glyphicon glyphicon-pencil"></span></a>
             </li>
