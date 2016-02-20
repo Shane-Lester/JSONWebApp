@@ -21,13 +21,21 @@ angular.module('JSONApp')
 			$state.go('app.new');
 			}
 		}
+
+		//add the JSON to the scope to display it
 	$scope.json = Items.entries;
 
 	$scope.download = function(){
 		 var a=Items.download();
 		 $('#target').html(a);
 
-			}
+			};
+
+	$scope.remove = function(index){
+		// console.log(Items.entries.admin[index]);
+		Items.remove(index);
+	}
+
 
 }])
 
