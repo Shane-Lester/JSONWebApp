@@ -37,17 +37,17 @@ angular.module('JSONApp')
 	$scope.item={};
 
 	if(!$stateParams.id){
-		$scope.info = Items.entries.admin.length;
+		$scope.info1 = Items.entries.admin.length;
 		// console.log('making new item');
 
 		//each entry is added to a the admin property of the array of objects
-		//each entry is an object with a mainTitle property and a data property
-		//mainTitle is either submitted from the editted item or created from the
+		//each entry is an object with a title property and a data property
+		//title is either submitted from the editted item or created from the
 		//$scope.new.item object
 		//the data is an array
-		$scope.editting ={mainTitle: "",
+		$scope.editting ={title: "",
 					data:[]};
-		$scope.editting.mainTitle = Items.getNew();
+		$scope.editting.title = Items.getNew();
 
 	}
 	else{
@@ -66,13 +66,13 @@ angular.module('JSONApp')
 			if($scope.object.data[1].subheading){
 				$scope.item.subheading = $scope.object.data[1].subheading;
 			}
-			if($scope.object.data[2].info){
-				$scope.item.info = $scope.object.data[2].info;
+			if($scope.object.data[2].info1){
+				$scope.item.info1 = $scope.object.data[2].info1;
 				}
 		}
 		$scope.editting = $scope.object;
 	}
-	// console.log($scope.editting.mainTitle);
+	// console.log($scope.editting.title);
 	$scope.save = function(){
 		//send the item in the array- we will replace this with the new object
 		//send the object through
@@ -89,12 +89,12 @@ angular.module('JSONApp')
 		if(!$scope.item.subheading){
 			$scope.item.subheading = "-";
 			}
-		if(!$scope.item.info){
-			$scope.item.info = "-";
+		if(!$scope.item.info1){
+			$scope.item.info1 = "-";
 			}
 		$scope.editting.data.push({heading:$scope.item.heading});
 		$scope.editting.data.push({subheading:$scope.item.subheading});
-		$scope.editting.data.push({info:$scope.item.info});
+		$scope.editting.data.push({info1:$scope.item.info1});
 
 		// console.log($scope.editting);
 

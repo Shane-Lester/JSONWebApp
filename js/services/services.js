@@ -6,15 +6,15 @@ angular.module('JSONApp')
 
 	service.entries= {"admin":
 	[
-			{"mainTitle":"Consultants",
+			{"title":"Consultants",
 			"data":[
 				{"heading":"Mr White"},
 				{"subheading": "Assassin"},
-				{"info": "Uses knives"}
+				{"info1": "Uses knives"}
 			]},
-			{"mainTitle":"SAS Doctors",
+			{"title":"SAS Doctors",
 			"data":[]},
-			{"mainTitle":"Rota",
+			{"title":"Rota",
 			"data":[]}
 
 		]};
@@ -62,7 +62,7 @@ angular.module('JSONApp')
 		var a = document.createElement('a');
 		a.download    = "department.json";
 		a.href        = url;
-		a.textContent = "Download backup.json";
+		a.textContent = "Download department.json";
 		
 		return a;
 
