@@ -54,7 +54,7 @@ angular.module('JSONApp')
 	$scope.item={};
 
 	if(!$stateParams.id){
-		$scope.info1 = Items.entries.admin.length;
+		$scope.id = Items.entries.admin.length;
 		// console.log('making new item');
 
 		//each entry is added to a the admin property of the array of objects
@@ -74,7 +74,7 @@ angular.module('JSONApp')
 		$scope.object = Items.entries.admin[$scope.id];
 		// console.log($scope.object);
 		// if the data array is not empty, read the elements and apply them to the scope
-		console.log($scope.object.data.length);
+		// console.log($scope.object.data.length);
 		if($scope.object.data.length >0){
 
 			if($scope.object.data[0].heading){
@@ -85,6 +85,9 @@ angular.module('JSONApp')
 			}
 			if($scope.object.data[2].info1){
 				$scope.item.info1 = $scope.object.data[2].info1;
+				}
+			if($scope.object.data[3].info2){
+			$scope.item.info2 = $scope.object.data[3].info2;
 				}
 		}
 		$scope.editting = $scope.object;
@@ -109,9 +112,13 @@ angular.module('JSONApp')
 		if(!$scope.item.info1){
 			$scope.item.info1 = "-";
 			}
+		if(!$scope.item.info2){
+			$scope.item.info2 = "-";
+			}
 		$scope.editting.data.push({heading:$scope.item.heading});
 		$scope.editting.data.push({subheading:$scope.item.subheading});
 		$scope.editting.data.push({info1:$scope.item.info1});
+		$scope.editting.data.push({info2:$scope.item.info2});
 
 		// console.log($scope.editting);
 

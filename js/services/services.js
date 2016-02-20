@@ -10,7 +10,8 @@ angular.module('JSONApp')
 			"data":[
 				{"heading":"Mr White"},
 				{"subheading": "Assassin"},
-				{"info1": "Uses knives"}
+				{"info1": "Uses knives"},
+				{"info2": "Vicious"}
 			]},
 			{"title":"SAS Doctors",
 			"data":[]},
