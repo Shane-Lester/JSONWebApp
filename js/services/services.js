@@ -28,13 +28,8 @@ angular.module('JSONApp')
 		]};
 
 
-		// consider creating a single object from the form and then pushing each element into the array on saving
-		// --**this may  be necessary when loading in from external JSON
-		//--** as there may be missing elements and we may need to validate them against their keys
-		// on reloading we need to retrieve the last 3 objects in the array and then translate them back into the object
 
 	service.save = function(newObject, index){
-		// console.log("object is " + newObject);
 
 		if(index == service.entries.length){
 			service.entries.admin.push(newObject);
@@ -50,6 +45,11 @@ angular.module('JSONApp')
 	service.createNew =function(title){
 		//passes the title in from the scope to be then used by the edit controller
 		newTitle = title;
+		//passes the title in from the scope to be then used by the edit controller
+		var newItem = {"title":title,
+			"data":[]};
+
+		service.entries.admin.push(newItem);
 	}
 
 	service.getNew =function(){
