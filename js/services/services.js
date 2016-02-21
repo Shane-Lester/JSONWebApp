@@ -27,6 +27,29 @@ angular.module('JSONApp')
 
 		]};
 
+	service.clinicalEntries= {"admin":
+	[
+			{"title":"Tonsillitis",
+			"data":[
+				{"heading":"Diagnosis"},
+				{"subheading": "Look in the mouth"},
+				{"info1": "Large tonsils"},
+				{"info2": "Pus"},
+				{"item":"</hr>"},
+				{"heading":"Red flags"},
+				{"subheading": "Call the reg"},
+				{"info1": "Supraglottitis signs"},
+				{"info2": "Emergency"},
+				{"item":"</hr>"}
+
+			]},
+			{"title":"Stridor",
+			"data":[]},
+			{"title":"Epistaxis",
+			"data":[]}
+
+		]};	
+
 
 	service.createNew =function(title){
 		//passes the title in from the scope to be then used by the edit controller

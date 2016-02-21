@@ -13,6 +13,11 @@
           <span class="navbar-brand" ><img src="img/logo.png" class="brand" height="16" /> 
           <p >Lester's ENT UK JSON creator</p></span>
         </div>
+        <ul class="nav navbar-nav">
+          <li><a ng-class="active" ui-sref="app.home">Department</a></li>
+          <li><a ui-sref="app.homeClin">Clinical</a></li> 
+          <li><a ui-sref="app.help">Help</a></li> 
+        </ul>
       </div>
     </nav>
     <div class="container" ng-controller = "DataViewController" >

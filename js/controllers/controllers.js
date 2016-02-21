@@ -5,10 +5,17 @@ angular.module('JSONApp')
 //listing all of the items of JSON and carries data through for new items
 .controller('DataViewController',['$scope','Items','$state',function($scope, Items, $state){
 	$scope.newItem="";
-	$scope.department=Items.entries;
-
+	console.log($state.current.name);
+	if($state.current.name=="app.home"){
+		// console.log('department');
+		$scope.department=Items.entries;
+			}
+	else{
+		$scope.department = Items.clinicalEntries;
+		// console.log('clinical');
+		}
 	//add the JSON to the scope to display it
-	$scope.json = Items.entries;
+	$scope.json =  $scope.department;
 
 	//Call the download function
 	$scope.download = function(){
@@ -54,10 +61,24 @@ angular.module('JSONApp')
 .controller('DataEditController',['$scope', '$stateParams', 'Items', '$state',function($scope, $stateParams, Items, $state){
 	$scope.newItem="";
 	$scope.item={};
+	var state ='';
+	var home ='';
+
+	if($state.current.name == "app.edit"){
+		$scope.sourceData = Items.entries;
+		home ='app.home';
+		state = 'department';
+
+	}
+	else{
+		$scope.sourceData = Items.clinicalEntries;
+		state = 'clinical';
+		home = 'app.homeClin';
+	}
 
 	if(!$stateParams.id){
 		//if no id then we are creating a new data item- this shouldn't happen any more as we create a title then edit
-		$scope.id = Items.entries.admin.length;
+		$scope.id = $scope.sourceData.admin.length;
 
 		$scope.copy ={title: "",
 					data:[]}; 
@@ -68,7 +89,7 @@ angular.module('JSONApp')
 		//we know there is an id so put it on the scope as $scope.id
 		$scope.id = $stateParams.id
 		//use this to access the Items service and get the object from the array - it references the array in the scope
-		$scope.object = angular.copy( Items.entries.admin[$scope.id]);
+		$scope.object = angular.copy( $scope.sourceData.admin[$scope.id]);
 		//$scope.object is an object and has a data attribute which has an array holding the objects with the details
 		//let's create a deep copied duplicate of the array only to work on
 		$scope.copy = [];
@@ -82,7 +103,7 @@ angular.module('JSONApp')
 		$scope.hack = {}
 		angular.copy($scope.object, $scope.hack);
 		angular.copy($scope.hack, $scope.object);
-		$state.go('app.home');
+		$state.go(home);
 	}
 	$scope.save = function(){
 
@@ -94,8 +115,8 @@ angular.module('JSONApp')
 				}
 			};
 		});
-		Items.entries.admin[$scope.id].data = angular.copy($scope.copy.data);
-		$state.go('app.home');
+		$scope.sourceData.admin[$scope.id].data = angular.copy($scope.copy.data);
+		$state.go(home);
 	}
 
 	$scope.addSection = function(){
@@ -109,6 +130,7 @@ angular.module('JSONApp')
 
 
 }])
+
 
 .filter('prettyJSON', function () {
     function prettyPrintJson(json) {
