@@ -11,7 +11,14 @@ angular.module('JSONApp')
 				{"heading":"Mr White"},
 				{"subheading": "Assassin"},
 				{"info1": "Uses knives"},
-				{"info2": "Vicious"}
+				{"info2": "Vicious"},
+				{"item":"</hr>"},
+				{"heading":"Mr Black"},
+				{"subheading": "Friend"},
+				{"info1": "Uses flowers"},
+				{"info2": "Kind"},
+				{"item":"</hr>"}
+
 			]},
 			{"title":"SAS Doctors",
 			"data":[]},
@@ -30,16 +37,11 @@ angular.module('JSONApp')
 		// console.log("object is " + newObject);
 
 		if(index == service.entries.length){
-			// console.log('this is a new item so we will push it');
-			// console.log(newObject);
 			service.entries.admin.push(newObject);
-			// console.log(newObject);
 		}
 		else{
-			// console.log("We will replace the item");
 			//need to add the objects
 			//service.entries.admin[index] is the correct place
-			//we need to add an object with data as a key and an array filled with objects
 			service.entries.admin[index] = newObject;
 		}
 
@@ -48,7 +50,6 @@ angular.module('JSONApp')
 	service.createNew =function(title){
 		//passes the title in from the scope to be then used by the edit controller
 		newTitle = title;
-		// console.log ("service function createNew for :" +newTitle);
 	}
 
 	service.getNew =function(){
@@ -59,20 +60,8 @@ angular.module('JSONApp')
 		service.entries.admin.splice(index,1);
 	}
 
-	service.move = function(index, direction){
-		var moveItem ={};
-		// console.log(index);
-		//if direction is -1 move up in array +1 move down- gives an array so take object 0
-		
-		moveItem =service.entries.admin.splice(index,1)[0];
-		// console.log(moveItem);
-
-		service.entries.admin.splice(index+direction,0,moveItem);
-	}
-
 	service.download= function(){
 		//from http://stackoverflow.com/questions/16329293/save-json-string-to-client-pc-using-html5-api
-		// console.log('service.download function');
 		var data = service.entries;
 		var json = JSON.stringify(data);
 		var blob = new Blob([json], {type: "application/json"});

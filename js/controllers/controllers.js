@@ -55,74 +55,77 @@ angular.module('JSONApp')
 
 	if(!$stateParams.id){
 		$scope.id = Items.entries.admin.length;
-		// console.log('making new item');
 
-		//each entry is added to a the admin property of the array of objects
-		//each entry is an object with a title property and a data property
-		//title is either submitted from the editted item or created from the
-		//$scope.new.item object
-		//the data is an array
 		$scope.editting ={title: "",
 					data:[]};
 		$scope.editting.title = Items.getNew();
 
 	}
 	else{
-		//we know there is an id so put it on the scope
+		//we know there is an id so put it on the scope as $scope.id
 		$scope.id = $stateParams.id
 		//use this to access the Items service and get the object from the array
 		$scope.object = Items.entries.admin[$scope.id];
-		// console.log($scope.object);
-		// if the data array is not empty, read the elements and apply them to the scope
-		// console.log($scope.object.data.length);
-		if($scope.object.data.length >0){
+		//$scope.object has a data attribute which has an array key holding the details
+		//let's create a deep copied duplicate of the array only to work on
+		$scope.copy = [];
+		$scope.copy=_.clone( $scope.object.data);
+		// if the data array is not empty, read the elements and apply them to the scope of the form to edit them
+		// if($scope.object.data.length >0){
 
-			if($scope.object.data[0].heading){
-				$scope.item.heading = $scope.object.data[0].heading;
-			}
-			if($scope.object.data[1].subheading){
-				$scope.item.subheading = $scope.object.data[1].subheading;
-			}
-			if($scope.object.data[2].info1){
-				$scope.item.info1 = $scope.object.data[2].info1;
-				}
-			if($scope.object.data[3].info2){
-			$scope.item.info2 = $scope.object.data[3].info2;
-				}
-		}
-		$scope.editting = $scope.object;
+		// 	if($scope.object.data[0].heading){
+		// 		$scope.item.heading = $scope.object.data[0].heading;
+		// 	}
+		// 	if($scope.object.data[1].subheading){
+		// 		$scope.item.subheading = $scope.object.data[1].subheading;
+		// 	}
+		// 	if($scope.object.data[2].info1){
+		// 		$scope.item.info1 = $scope.object.data[2].info1;
+		// 		}
+		// 	if($scope.object.data[3].info2){
+		// 	$scope.item.info2 = $scope.object.data[3].info2;
+		// 		}
+		// }
+		// $scope.editting = $scope.object;
 	}
 	// console.log($scope.editting.title);
 	$scope.save = function(){
-		//send the item in the array- we will replace this with the new object
-		//send the object through
-		// console.log($scope.editting);
-		// console.log($scope.item);
 
-		$scope.editting.data =[]; 
-		//only push the data items if they are there
-		//otherwise push a dash- to keep it consistent
-		if(!$scope.item.heading){
-			$scope.item.heading = "-";
-			}
 
-		if(!$scope.item.subheading){
-			$scope.item.subheading = "-";
-			}
-		if(!$scope.item.info1){
-			$scope.item.info1 = "-";
-			}
-		if(!$scope.item.info2){
-			$scope.item.info2 = "-";
-			}
-		$scope.editting.data.push({heading:$scope.item.heading});
-		$scope.editting.data.push({subheading:$scope.item.subheading});
-		$scope.editting.data.push({info1:$scope.item.info1});
-		$scope.editting.data.push({info2:$scope.item.info2});
+		// $scope.editting.data =[]; 
+		// //only push the data items if they are there
+		// //otherwise push a dash- to keep it consistent
+		// if(!$scope.item.heading){
+		// 	$scope.item.heading = "-";
+		// 	}
 
-		// console.log($scope.editting);
+		// if(!$scope.item.subheading){
+		// 	$scope.item.subheading = "-";
+		// 	}
+		// if(!$scope.item.info1){
+		// 	$scope.item.info1 = "-";
+		// 	}
+		// if(!$scope.item.info2){
+		// 	$scope.item.info2 = "-";
+		// 	}
+		// $scope.editting.data.push({heading:$scope.item.heading});
+		// $scope.editting.data.push({subheading:$scope.item.subheading});
+		// $scope.editting.data.push({info1:$scope.item.info1});
+		// $scope.editting.data.push({info2:$scope.item.info2});
 
-		Items.save($scope.editting, $scope.id);
+		// // console.log($scope.editting);
+
+		// Items.save($scope.editting, $scope.id);
+		$scope.copy.forEach(function(item){
+
+			for(key in item){
+				if (item[key]=="undefined"){
+					item[key] =="";
+				}
+			};
+		});
+		angular.copy($scope.copy,$scope.object.data);
+
 		$state.go('app.home');
 	}
 

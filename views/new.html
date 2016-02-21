@@ -8,12 +8,18 @@ Number
 </div> -->
 <h2>{{editting.title}}</h2>
 <div class ='row'>
-	<div class ='col-xs-12'>
+	<div class ='col-xs-12 bg-highlight' >
 		<form name = "itemForm">
-			<div class ='form-group'>
-				<input type="text" class ="form-control" placeholder="Heading" ng-model="item.heading">
+			<div id="test" class ='form-group'  ng-repeat="item in copy" trackby $index>
+				<div ng-repeat="(key,value) in item" trackby$index>
+					<div ng-hide = "key=='item'">{{key| uppercase}}
+						<input type="text" class ="form-control" id="{{key}}" placeholder="{{value}}" ng-model="item[key]">
+						{{item[key]}}
+					</div>
+					<hr ng-show="key=='item'">
+				</div>
 			</div>
-			<div class = 'form-group'>
+	<!-- 		<div class = 'form-group'>
 				<input type ="text" class ="form-control" placeholder="Sub-Heading" ng-model="item.subheading">
 			</div>
 			<div class ='form-group'>
@@ -21,7 +27,13 @@ Number
 			</div>
 			<div class ='form-group'>
 				<input type = 'text' class ='form-control' placeholder="info2" ng-model='item.info2'></input>
-			</div>
+			</div> -->
+			<div class='form-group'>
+				<button type = 'button' class ='btn btn-info btn-lg btn-block' ng-click='addSection()'>
+					<span class ='glyphicon glyphicon-plus'></span>
+					Add Section
+				</button>
+			</div>			
 			<div class='form-group'>
 				<button type = 'button' class ='btn btn-success btn-lg btn-block' ng-click='save()'>
 					<span class ='glyphicon glyphicon-ok'></span>
@@ -29,7 +41,7 @@ Number
 				</button>
 			</div>
 			<div class='form-group'>
-				<a ui-sref='app.home' class='btn btn-default btn-lg btn-block'>
+				<a ui-sref='app.home' class='btn btn-danger btn-lg btn-block'>
 					<span class ='glyphicon glyphicon-remove'>Cancel</span>
 				</a>
 			</div>
