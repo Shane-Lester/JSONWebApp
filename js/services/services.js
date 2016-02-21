@@ -27,6 +27,11 @@ angular.module('JSONApp')
 
 		]};
 
+	service.move = function(index, direction){
+		var temp = service.entries.admin.splice(index, 1);
+		console.log(temp);
+		service.entries.admin.splice(index + direction, 0, temp);
+	}
 
 
 	service.save = function(newObject, index){

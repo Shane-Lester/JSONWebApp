@@ -31,6 +31,17 @@ angular.module('JSONApp')
 		Items.remove(index);
 	}
 
+	$scope.moveUp = function(index){
+		Items.move(index,-1);
+	}
+
+	$scope.moveDown = function(index){
+		Items.move(index,+1);
+	}
+
+
+
+
 }])
 
 //edit or create an item for JSON
