@@ -7,25 +7,31 @@ angular.module('JSONApp')
 	$scope.newItem="";
 	$scope.department=Items.entries;
 
+	//add the JSON to the scope to display it
+	$scope.json = Items.entries;
+
+	//Call the download function
+	$scope.download = function(){
+	 var a=Items.download();
+	 $('#target').html(a);
+
+		};
+
 	//addNew called when Add new item button pressed and has added item.new to the scope
 	$scope.addNew = function(){
 		if($scope.newItem.trim().length < 1){
 			$state.go('app.home');
 		}
 		else{
+			//pass the new item title to the service to then send it out to the edit controller
 			Items.createNew($scope.newItem);
 			$scope.newItem = "";
 			}
 		}
 
-	//add the JSON to the scope to display it
-	$scope.json = Items.entries;
 
-	$scope.download = function(){
-		 var a=Items.download();
-		 $('#target').html(a);
 
-			};
+	//manage the menu items
 
 	$scope.remove = function(index){
 		Items.remove(index);
@@ -50,22 +56,23 @@ angular.module('JSONApp')
 	$scope.item={};
 
 	if(!$stateParams.id){
+		//if no id then we are creating a new data item- this shouldn't happen any more as we create a title then edit
 		$scope.id = Items.entries.admin.length;
 
 		$scope.copy ={title: "",
-					data:[]};
+					data:[]}; 
 		$scope.copy.title = Items.getNew();
 
 	}
 	else{
 		//we know there is an id so put it on the scope as $scope.id
 		$scope.id = $stateParams.id
-		//use this to access the Items service and get the object from the array
-		$scope.object = Items.entries.admin[$scope.id];
-		//$scope.object has a data attribute which has an array key holding the details
+		//use this to access the Items service and get the object from the array - it references the array in the scope
+		$scope.object = angular.copy( Items.entries.admin[$scope.id]);
+		//$scope.object is an object and has a data attribute which has an array holding the objects with the details
 		//let's create a deep copied duplicate of the array only to work on
 		$scope.copy = [];
-		$scope.copy=_.clone( $scope.object.data);
+		_.extend($scope.copy, $scope.object);
 		$scope.copy.title = $scope.object.title;
 	}
 
@@ -79,7 +86,7 @@ angular.module('JSONApp')
 	}
 	$scope.save = function(){
 
-		$scope.copy.forEach(function(item){
+		$scope.copy.data.forEach(function(item){
 
 			for(key in item){
 				if (item[key]=="undefined"){
@@ -87,17 +94,17 @@ angular.module('JSONApp')
 				}
 			};
 		});
-		angular.copy($scope.copy,$scope.object.data);
+		Items.entries.admin[$scope.id].data = angular.copy($scope.copy.data);
 		$state.go('app.home');
 	}
 
-		$scope.addSection = function(){
+	$scope.addSection = function(){
 
-		$scope.copy.push({"heading":""});
-		$scope.copy.push({"subheading":""});
-		$scope.copy.push({"info1":""});
-		$scope.copy.push({"info2":""});
-		$scope.copy.push({"item":"<hr>"});
+		$scope.copy.data.push({"heading":""});
+		$scope.copy.data.push({"subheading":""});
+		$scope.copy.data.push({"info1":""});
+		$scope.copy.data.push({"info2":""});
+		$scope.copy.data.push({"item":"<hr>"});
 	}
 
 

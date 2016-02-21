@@ -27,6 +27,21 @@ angular.module('JSONApp')
 
 		]};
 
+
+	service.createNew =function(title){
+		//passes the title in from the scope to be then used by the edit controller
+		newTitle = title;
+		var newItem = {"title":title,
+			"data":[]};
+
+		service.entries.admin.push(newItem);
+		};	
+
+	service.getNew =function(){
+		//return title to the edit controller
+			return newTitle;
+				};
+
 	service.move = function(index, direction){
 		var moveItem ={};
 		//if direction is -1 move up in array +1 move down- gives an array so take object 0
@@ -49,19 +64,9 @@ angular.module('JSONApp')
 
 	};
 
-	service.createNew =function(title){
-		//passes the title in from the scope to be then used by the edit controller
-		newTitle = title;
-		//passes the title in from the scope to be then used by the edit controller
-		var newItem = {"title":title,
-			"data":[]};
 
-		service.entries.admin.push(newItem);
-	}
 
-	service.getNew =function(){
-		return newTitle;
-	}
+
 
 	service.remove = function(index){
 		service.entries.admin.splice(index,1);

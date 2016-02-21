@@ -11,7 +11,7 @@ Number
 	<div class ='col-xs-12 bg-highlight' >
 
 		<form name = "itemForm">
-			<div id="test" class ='form-group'  ng-repeat="item in copy" trackby $index>
+			<div id="test" class ='form-group'  ng-repeat="item in copy.data" trackby $index>
 				<div ng-repeat="(key,value) in item" trackby$index>
 					<div ng-hide = "key=='item'">{{key| uppercase}}
 						<input type="text" class ="form-control" id="{{key}}" placeholder="{{value}}" ng-model="item[key]">
