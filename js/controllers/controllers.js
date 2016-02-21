@@ -55,7 +55,9 @@ angular.module('JSONApp')
 		//we know there is an id so put it on the scope as $scope.id
 		$scope.id = $stateParams.id
 		//use this to access the Items service and get the object from the array
-		$scope.object = Items.entries.admin[$scope.id];
+		// $scope.object = Items.entries.admin[$scope.id];
+		$scope.object ={};
+		angular.copy(Items.entries.admin[$scope.id], $scope.object);
 		//$scope.object has a data attribute which has an array key holding the details
 		//let's create a deep copied duplicate of the array only to work on
 		$scope.copy = [];
