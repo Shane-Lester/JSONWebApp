@@ -9,14 +9,14 @@ angular.module('JSONApp')
 			{"title":"Consultants",
 			"data":[
 				{"heading":"Mr White"},
-				{"subheading": "Assassin"},
-				{"info1": "Uses knives"},
-				{"info2": "Vicious"},
+				{"subheading": "Otology"},
+				{"info1": "Secretary- Julie"},
+				{"info2": "Ex 1111"},
 				{"item":"</hr>"},
 				{"heading":"Mr Black"},
-				{"subheading": "Friend"},
-				{"info1": "Uses flowers"},
-				{"info2": "Kind"},
+				{"subheading": "Rhinology"},
+				{"info1": "Secretary- Anne"},
+				{"info2": "Ex 1234"},
 				{"item":"</hr>"}
 
 			]},
