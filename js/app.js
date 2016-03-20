@@ -7,7 +7,7 @@ angular.module('JSONApp')
 	$stateProvider
 	.state('app',{
 		abstract: true,
-		templateUrl:"views/app.html",
+		templateUrl:"views/app.html"
 	})
 
 	.state('app.help',{
@@ -19,8 +19,7 @@ angular.module('JSONApp')
 	.state('app.home',{
 		url: "/home",
 		templateUrl: "views/home.html",
-		controller: "DataViewController",
-		cache: false
+		controller: "DataViewController"
 	})
 
 	.state('app.new',{
@@ -58,6 +57,8 @@ angular.module('JSONApp')
 
 .run(function(){
 	//lifted from http://stackoverflow.com/questions/24514717/bootstrap-navbar-active-state-not-working
+	$(".nav a ")
+
 	$(".nav a").on("click", function(){
 		   $(".nav").find(".active").removeClass("active");
 		   $(this).parent().addClass("active");

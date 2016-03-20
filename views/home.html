@@ -6,7 +6,7 @@
         <div class="col-xs-12">
 
           <ul class="list-group">
-            <li class="list-group-item text-center" ng-repeat="item in department.admin track by $index">
+            <li class="list-group-item text-center" ng-repeat="item in format.admin track by $index">
 
             <button class="btn btn-s pull-left" ng-click="moveUp($index)"><span class=" glyphicon glyphicon-arrow-up  "> </span></button>
               {{item.title}}
@@ -21,7 +21,7 @@
   <form name="titleForm">
     <div class = 'form-group'>
       New Item title
-      <input type="text" class = 'form-control' placeholder='Title' ng-model='newItem'>
+      <input type="text" class = 'form-control' placeholder='Title for new department item' ng-model='newItem'>
     </div>
   </form>
   <div class= "row">
