@@ -60,18 +60,26 @@ angular.module('JSONApp')
 
 	$scope.loadData = function() {
 		$('#loadingButton').html('LOADING');
-		var address = "http://www."+$scope.address
+		var address = "http://www."+$scope.address;
+		if(state =='department'){
+			address += "/docs/department.json";
+		}
+		if(state == "clinical"){
+			address += "/docs/clinical.json";
+		}
 		$http.get(address)
 			.then(function(res) {
-				// http://www.lesterweb.co.uk/docs/department.json
 				$('#loadingButton').html('SUCCESS!');
 				if (state == "department") {
 
 					Items.setEntries(res.data,$scope.address);
+					$scope.address = address;
 				}
 				else{
 					// console.log(res.data);
 					Items.setClinEntries(res.data,$scope.address);
+					$scope.address = address;
+
 				}
 				$state.go($state.current, {}, {
 					reload: true

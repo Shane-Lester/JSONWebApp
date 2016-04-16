@@ -81,7 +81,7 @@ angular.module('JSONApp')
 
 		service.setClinEntries = function(data, address) {
 			service.clinicalEntries = data;
-			service.clinAddress = address;
+			// service.clinAddress = address;
 
 		}
 
