@@ -159,7 +159,7 @@ angular.module('JSONApp')
 	}
 
 	$scope.addSection = function() {
-		
+
 			$scope.copy.data.push({
 				"heading": ""
 			});
@@ -175,7 +175,7 @@ angular.module('JSONApp')
 			$scope.copy.data.push({
 				"item": "<hr>"
 			});
-		
+
 	}
 
 
