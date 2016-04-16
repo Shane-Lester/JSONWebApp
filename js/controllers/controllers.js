@@ -3,21 +3,25 @@
 angular.module('JSONApp')
 
 //listing all of the items of JSON and carries data through for new items
-.controller('DataViewController', ['$scope', 'Items', '$state', function($scope, Items, $state) {
+.controller('DataViewController', ['$scope', 'Items', '$state', '$http', function($scope, Items, $state, $http) {
 	$scope.newItem = "";
 	var state = '';
 	var home = '';
+
 
 	if ($state.current.name == "app.home") {
 		// console.log('department');
 		$scope.format = Items.entries;
 		home = 'app.home';
 		state = 'department';
+		$scope.address = Items.deptAddress;
 	} else {
 		$scope.format = Items.clinicalEntries;
 		// console.log('clinical');
 		home = 'app.homeClin';
 		state = 'clinical';
+		$scope.address = Items.clinAddress;
+
 	}
 	//add the JSON to the scope to display it
 	$scope.json = $scope.format;
@@ -40,20 +44,47 @@ angular.module('JSONApp')
 		}
 	}
 
-
-
 	//manage the menu items
 
 	$scope.remove = function(index) {
-		Items.remove(index,state);
+		Items.remove(index, state);
 	}
 
 	$scope.moveUp = function(index) {
-		Items.move(index, state,-1);
+		Items.move(index, state, -1);
 	}
 
 	$scope.moveDown = function(index) {
-		Items.move(index,state, +1);
+		Items.move(index, state, +1);
+	}
+
+	$scope.loadData = function() {
+		$('#loadingButton').html('LOADING');
+		var address = "http://www."+$scope.address
+		$http.get(address)
+			.then(function(res) {
+				// http://www.lesterweb.co.uk/docs/department.json
+				$('#loadingButton').html('SUCCESS!');
+				if (state == "department") {
+
+					Items.setEntries(res.data,$scope.address);
+				}
+				else{
+					// console.log(res.data);
+					Items.setClinEntries(res.data,$scope.address);
+				}
+				$state.go($state.current, {}, {
+					reload: true
+				});
+			},
+			function(err){
+				$('#loadingButton').html('Failed to load data!');
+				$state.go($state.current, {}, {
+					reload: true
+				});
+
+			})
+
 	}
 
 
@@ -83,7 +114,7 @@ angular.module('JSONApp')
 
 		//if no id then we are creating a new data item- this shouldn't happen any more as we create a title then edit
 		if (state == "department") {
-			$scope.id = $scope.sourceData.admin.length;
+			$scope.id = $scope.sourceData.department.length;
 
 			$scope.copy = {
 				title: "",
@@ -102,7 +133,7 @@ angular.module('JSONApp')
 		$scope.id = $stateParams.id
 			//use this to access the Items service and get the object from the array - it references the array in the scope
 		if (state == "department") {
-			$scope.object = angular.copy($scope.sourceData.admin[$scope.id]);
+			$scope.object = angular.copy($scope.sourceData.department[$scope.id]);
 
 			//$scope.object is an object and has a data attribute which has an array holding the objects with the details
 			//let's create a deep copied duplicate of the array only to work on
@@ -146,7 +177,7 @@ angular.module('JSONApp')
 			});
 
 
-			$scope.sourceData.admin[$scope.id].data = angular.copy($scope.copy.data);
+			$scope.sourceData.department[$scope.id].data = angular.copy($scope.copy.data);
 
 
 
@@ -160,21 +191,21 @@ angular.module('JSONApp')
 
 	$scope.addSection = function() {
 
-			$scope.copy.data.push({
-				"heading": ""
-			});
-			$scope.copy.data.push({
-				"subheading": ""
-			});
-			$scope.copy.data.push({
-				"info1": ""
-			});
-			$scope.copy.data.push({
-				"info2": ""
-			});
-			$scope.copy.data.push({
-				"item": "<hr>"
-			});
+		$scope.copy.data.push({
+			"heading": ""
+		});
+		$scope.copy.data.push({
+			"subheading": ""
+		});
+		$scope.copy.data.push({
+			"info1": ""
+		});
+		$scope.copy.data.push({
+			"info2": ""
+		});
+		$scope.copy.data.push({
+			"item": "<hr>"
+		});
 
 	}
 

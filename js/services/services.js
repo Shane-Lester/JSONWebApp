@@ -3,9 +3,11 @@ angular.module('JSONApp')
 	.factory('Items', function() {
 		var service = {};
 		var newTitle = "";
+		// service.deptAddress = "Full web address of departmental data";
+		// service.clinAddress = "Full web address of clinical data";
 
 		service.entries = {
-			"admin": [{
+			"department": [{
 					"title": "Consultants",
 					"data": [{
 							"heading": "Mr White"
@@ -41,6 +43,11 @@ angular.module('JSONApp')
 			]
 		};
 
+		service.setEntries = function(data, address) {
+			service.entries = data;
+			// service.deptAddress = address;
+		}
+
 		service.clinicalEntries = {
 			"clinical": [{
 				"title": "Acute tonsillitis",
@@ -71,6 +78,12 @@ angular.module('JSONApp')
 				"flags": "Nil"
 			}]
 		};
+
+		service.setClinEntries = function(data, address) {
+			service.clinicalEntries = data;
+			service.clinAddress = address;
+
+		}
 
 
 		service.createNew = function(title, state) {
