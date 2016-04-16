@@ -1,0 +1,53 @@
+<!-- new.html -->
+<!-- <div class='row'>
+	<a ui-sref ="app.home">Go back</a>
+</div> -->
+<!-- <div>
+Number
+	{{info1}}
+</div> -->
+<h2>{{copy.title}}</h2>
+<div class ='row'>
+	<div class ='col-xs-12 bg-highlight' >
+
+		<form name = "itemForm">
+					<div >SHORTNAME
+						<input type="text" class ="form-control" id="{{copy.shortname}}" placeholder="{{copy.shortname}}" ng-model="copy.shortname">
+					</div>
+					<div >SUMMARY OF CONDITION
+						<input type="text" class ="form-control" id="{{copy.summary}}" placeholder="{{copy.summary}}" ng-model="copy.summary">
+					</div>
+					<div >SYMPTOMS
+						<input type="text" class ="form-control" id="{{copy.symptoms}}" placeholder="{{copy.symptoms}}" ng-model="copy.symptoms">
+					</div>
+					<div >SIGNS
+						<input type="text" class ="form-control" id="{{copy.signs}}" placeholder="{{copy.signs}}" ng-model="copy.signs">
+					</div>
+					<div >WHEN TO ADMIT
+						<input type="text" class ="form-control" id="{{copy.admit}}" placeholder="{{copy.admit}}" ng-model="copy.admit">
+					</div>
+					<div >WHAT TO DO
+					<textarea class="form-control" rows = "4" id="{{copy.required}}" placeholder="{{copy.required}}" ng-model="copy.required">
+						</textarea>
+					</div>
+					<div >RED FLAGS
+						<textarea rows="4" class ="form-control" id="{{copy.flags}}" placeholder="{{copy.flags}}" ng-model="copy.flags">
+						</textarea>
+					</div>
+					<br>
+			
+			<div class='form-group'>
+				<button type = 'button' class ='btn btn-success btn-lg btn-block' ng-click='save()'>
+					<span class ='glyphicon glyphicon-ok'></span>
+					Save
+				</button>
+			</div>
+			<div class='form-group'>
+				<button type = 'button' class ='btn btn-danger btn-lg btn-block' ng-click='cancel()'>
+					<span class ='glyphicon glyphicon-remove'></span>
+					Cancel
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
