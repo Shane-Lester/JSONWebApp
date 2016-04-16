@@ -1,4 +1,7 @@
 body { padding-top: 70px; }
+@media screen and (max-width: 768px){
+	body{padding-top: 180px}
+}
 
 .btn-separation-left {
 	margin-left:5px;
