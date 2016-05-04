@@ -7,6 +7,32 @@ angular.module('JSONApp')
 	$scope.newItem = "";
 	var state = '';
 	var home = '';
+	var suffix = '.json';
+	$scope.success = ""
+
+	$scope.showContent = function($fileContent){
+		var data = JSON.parse($fileContent);
+		if(data[state]){
+			console.log('valid JSON');
+			$scope.success = "Successfully loaded";
+			console.log(data);
+			if(state == "department"){
+			Items.setEntries(data);
+		}
+		else{
+			Items.setClinEntries(data);
+		}
+			$state.go($state.current, {}, {
+				reload: true
+			});
+
+		}
+		else{
+			console.log('no key');
+			$scope.success = "Failed- file "+state+suffix +" not found";
+		}
+		$scope.content = $fileContent;
+		};
 
 
 	if ($state.current.name == "app.home") {
@@ -227,4 +253,27 @@ angular.module('JSONApp')
 		return JSON ? JSON.stringify(json, null, '  ') : 'your browser doesnt support JSON so cant pretty print';
 	}
 	return prettyPrintJson;
+})
+//https://veamospues.wordpress.com/2014/01/27/reading-files-with-angularjs/
+.directive('onReadFile', function ($parse) {
+  return {
+    restrict: 'A',
+    scope: false,
+    link: function(scope, element, attrs) {
+      var fn = $parse(attrs.onReadFile);
+
+      element.on('change', function(onChangeEvent) {
+        var reader = new FileReader();
+
+        reader.onload = function(onLoadEvent) {
+					// console.log('onload');
+          scope.$apply(function() {
+            fn(scope, {$fileContent:onLoadEvent.target.result});
+          });
+        };
+
+        reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+      });
+    }
+  };
 });
