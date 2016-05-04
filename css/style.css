@@ -1,0 +1,26 @@
+body { padding-top: 70px; }
+@media screen and (max-width: 768px){
+	body{padding-top: 180px}
+}
+
+.btn-separation-left {
+	margin-left:5px;
+}
+
+.button-row {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+input.ng-invalid {
+	border: rgba(215, 44, 44, 0.6) solid 1px;
+}
+
+.bg-highlight{
+	background-color: #d3d3d3;
+
+}
+
+.active{
+  background-color: #e8e8e8;
+}

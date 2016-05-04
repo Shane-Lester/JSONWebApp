@@ -1,0 +1,47 @@
+	<!-- new.html -->
+<!-- <div class='row'>
+	<a ui-sref ="app.home">Go back</a>
+</div> -->
+<!-- <div>
+Number
+	{{info1}}
+</div> -->
+<form name = 'newitemTitle'>
+<div id = 'newTitle' class = 'form-group'>
+Title:{{copy.title}}
+<input type = 'text' class = 'form-control' placeholder = "new title" ng-model = "copy.title">
+</div>
+</form>
+<div class ='row'>
+	<div class ='col-xs-12 bg-highlight' >
+
+		<form name = "itemForm">
+			<div id="test" class ='form-group'  ng-repeat="item in copy.data" trackby $index>
+				<div ng-repeat="(key,value) in item" trackby$index>
+					<div ng-hide = "key=='item'">{{key| uppercase}}
+						<input type="text" class ="form-control" id="{{key}}" placeholder="{{value}}" ng-model="item[key]">
+					</div>
+					<hr ng-show="key=='item'">
+				</div>
+			</div>
+			<div class='form-group'>
+				<button type = 'button' class ='btn btn-info btn-lg btn-block' ng-click='addSection()'>
+					<span class ='glyphicon glyphicon-plus'></span>
+					Add Section
+				</button>
+			</div>
+			<div class='form-group'>
+				<button type = 'button' class ='btn btn-success btn-lg btn-block' ng-click='save()'>
+					<span class ='glyphicon glyphicon-ok'></span>
+					Save
+				</button>
+			</div>
+			<div class='form-group'>
+				<button type = 'button' class ='btn btn-danger btn-lg btn-block' ng-click='cancel()'>
+					<span class ='glyphicon glyphicon-remove'></span>
+					Cancel
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

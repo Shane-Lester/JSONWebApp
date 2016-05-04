@@ -1,0 +1,63 @@
+<!-- home.html -->
+
+<h2>File: department.json</h2>
+<h4> Load external data </h4>
+<form name = "loadForm">
+  <div class = 'form-group row'>
+    <div class ="col-xs-2">
+    http://www.
+    </div>
+    <div class = "col-xs-8">
+    <input type ="text" class = "form-control" placeholder="rest of address of external data" ng-model = "address">
+    </div>
+    <div class ="col-xs-2">
+    /docs/department.json
+    </div>
+  </div>
+
+  <div class= "row">
+  <div class ="col-xs-12" button-row>
+    <a class = "btn btn-primary btn-lg">
+      <span  id="loadingButton" ng-click="loadData()"> Load</span></a>
+  </div>
+</div>
+</form>
+<br>
+<div class="row">
+
+        <div class="col-xs-12">
+
+          <ul class="list-group">
+            <li class="list-group-item text-center" ng-repeat="item in format.department track by $index">
+
+            <button class="btn btn-s pull-left" ng-click="moveUp($index)"><span class=" glyphicon glyphicon-arrow-up  "> </span></button>
+              {{item.title}}
+            <button class="btn btn-s btn-separation-left pull-right" ng-click="moveDown($index)"> <span class="glyphicon glyphicon-arrow-down "></span></button>
+
+              <button type="button" class="btn btn-danger btn-s pull-right btn-separation-left"ng-click="remove($index)" ><span class="glyphicon glyphicon-trash"> </span></button>
+              <a ui-sref="app.edit({id:$index})" class="btn btn-primary btn-s pull-right"><span class="glyphicon glyphicon-pencil"></span></a>
+            </li>
+          </ul>
+        </div>
+  </div>
+  <form name="titleForm">
+    <div class = 'form-group'>
+      New Item title
+      <input type="text" class = 'form-control' placeholder='Title for new department item' ng-model='newItem'>
+    </div>
+  </form>
+  <div class= "row">
+  <div class ="col-xs-12" button-row>
+    <a class = "btn btn-success btn-lg">
+      <span class="glyphicon glyphicon-plus" ng-click="addNew()"> Add new item</span></a>
+  </div>
+</div>
+
+<div>
+<br>
+  <a class ='btn btn-warning'ng-click="download()">Download</a>
+</div>
+<div id="target"></div>
+<div>
+  <pre>  {{json | prettyJSON }}</pre>
+</div>
