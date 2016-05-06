@@ -18,10 +18,10 @@ Title:{{copy.title}}
 		<form name = "itemForm">
 			<div id="test" class ='form-group'  ng-repeat="item in copy.data" trackby $index>
 				<div ng-repeat="(key,value) in item" trackby$index>
-					<div ng-hide = "key=='item'">{{key| uppercase}}
+					<div >{{key| uppercase}}
 						<input type="text" class ="form-control" id="{{key}}" placeholder="{{value}}" ng-model="item[key]">
 					</div>
-					<hr ng-show="key=='item'">
+					<!-- <hr ng-show="key=='item'"> -->
 				</div>
 			</div>
 			<div class='form-group'>

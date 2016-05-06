@@ -361,6 +361,12 @@ angular.module('JSONApp')
           'flags': 'Neurological signs- escalate to senior.'
         },
         {'title': 'Acute mastoiditis',
+        },
+        {'title': 'Fractured nose',
+          'summary': 'Usually referred by A&E at time of injury<br/> best time to see patient is 5-7 days post injury when swelling has settled<br/> Manipulation will only be able to correct deformity that has occurred as result of the latest injury.',
+          'symptoms': 'Altered shape of nose following trauma<br/> May have nasal obstruction<br/> If seen acutely may have epistaxis.',
+          'signs': 'Deviation of nasal bridge with associated bruising +/- swelling<br/> May have decreased air entry due to septal deviation or septal haematoma (see below)<br/> Depending on trauma sustained may have other facial fractures/base of skull #/neck injury-important not missed.',
+          'admit': 'When there is other trauma or uncontrolled epistaxis',
           'summary': 'Acute infective process of mastoid air cells secondary to acute otitis media (AOM)<br/> Rare in adults<br/> Most commonly seen in infants and young children.',
           'symptoms': 'Severe otalgia, pyrexia and hearing loss<br/> May have started with URTI<br/> Parents may have noticed protruding ear.',
           'signs': 'Child appears miserable<br/> Protruding ear<br/> Tympanic membrane consistent with AOM-red, bulging<br/> Erythema behind pinna, extremely tender to touch<br/> May have fluctuant swelling behind pinna<br/> If intracranial extension may have signs of meningism/altered conscious level.',
@@ -374,13 +380,7 @@ angular.module('JSONApp')
           'signs': 'FB may be visible on inspection<br/> Unilateral rhinorrhoea<br/> Decreased air entry unilaterally<br/> May not be any signs.',
           'admit': 'Unable to remove FB in clinic and requires removal under GA (ALL FB nose are removed as an emergency).',
           'required': 'Attempt removal in clinic-usually only get one chance to attempt removal in young children<br/> If unable to remove admit for removal under GA<br/> Clerk<br/> Keep NBM<br/> Inform SPR<br/> Add to Morpheus/speak to Bev Mckinstry regarding availability on theatre lists.',
-          'flags': 'If ANY SUSPICION of a button battery, must be removed IMMEDIATELY.'
-        },
-        {'title': 'Fractured nose',
-          'summary': 'Usually referred by A&E at time of injury<br/> best time to see patient is 5-7 days post injury when swelling has settled<br/> Manipulation will only be able to correct deformity that has occurred as result of the latest injury.',
-          'symptoms': 'Altered shape of nose following trauma<br/> May have nasal obstruction<br/> If seen acutely may have epistaxis.',
-          'signs': 'Deviation of nasal bridge with associated bruising +/- swelling<br/> May have decreased air entry due to septal deviation or septal haematoma (see below)<br/> Depending on trauma sustained may have other facial fractures/base of skull #/neck injury-important not missed.',
-          'admit': 'When there is other trauma or uncontrolled epistaxis',
+          'flags': 'If ANY SUSPICION of a button battery, must be removed IMMEDIATELY.',
           'required': 'Good history – often have to write police statements<br/> Clear documentation of findings<br/> Check for septal haematoma and document that this has been done<br/> Check for other facial fractures/base of skull # (haemotympanum, panda eyes, post auricular bruising)<br/> If too much bruising and swelling to be able to assess nasal deformity ask patient to reattend a few days later<br/> If evidence of deviation of nasal bridge offer patient manipulation of nasal bones (MUA) under local anaesthetic (GA reserved for children, patients who really don’t want attempt under LA and if it  felt a better cosmetic outcome could be achieved under GA after LA been attempted). Ensure consent form is signed by patient<br/> If patient to have MUA under GA, clerk, consent and send to Bev Mckinstry for date for surgery-must be within 2 weeks of injury.',
           'flags': 'Ensure other injuries not missed including septal haematoma.'
         },
@@ -457,6 +457,9 @@ angular.module('JSONApp')
     service.move = function (index, state, direction) {
       var moveItem = {}
       // if direction is -1 move up in array +1 move down- gives an array so take object 0
+      if (direction == -1 && index == 0) {
+        return // can't move it less than 0
+      }
       if (state == 'department') {
         moveItem = service.entries.department.splice(index, 1)[0]
 
