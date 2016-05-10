@@ -16,18 +16,34 @@ Title:{{copy.title}}
 	<div class ='col-xs-12 bg-highlight' >
 
 		<form name = "itemForm">
-			<div id="test" class ='form-group'  ng-repeat="item in copy.data" trackby $index>
-				<div ng-repeat="(key,value) in item" trackby$index>
+			<div id="test" class ='form-group'  ng-repeat="item in copy.data track by $index">
+				<div ng-hide= "key == 'image'" ng-repeat="(key,value) in item track by $index">
 					<div >{{key| uppercase}}
 						<input type="text" class ="form-control" id="{{key}}" placeholder="{{value}}" ng-model="item[key]">
 					</div>
 					<!-- <hr ng-show="key=='item'"> -->
 				</div>
+				<div ng-show= "key == 'image'" >
+					<div >IMAGE:{{item.image}}
+					<div ng-repeat = "image in item.src track by $index">
+						<input type="text" class ="form-control" id="{{key}}" ng-model="item.src[$index]">
+					</div>
+					</div>
+					<!-- <hr ng-show="key=='item'"> -->
+				</div>
 			</div>
-			<div class='form-group'>
+
+			<!-- need to hide all of this and implement a list of image titles for the array if there is an image flag.. needs implementing-->
+			<div ng-hide = "copy.data[0].image" class='form-group'>
 				<button type = 'button' class ='btn btn-info btn-lg btn-block' ng-click='addSection()'>
 					<span class ='glyphicon glyphicon-plus'></span>
 					Add Section
+				</button>
+			</div>
+			<div ng-show = "copy.data[0].image" class='form-group'>
+				<button type = 'button' class ='btn btn-info btn-lg btn-block' ng-click='addNewImage()'>
+					<span class ='glyphicon glyphicon-plus'></span>
+					Add New Image
 				</button>
 			</div>
 			<div class='form-group'>

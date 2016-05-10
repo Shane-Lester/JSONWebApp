@@ -16,35 +16,56 @@ Title:{{copy.title}}
 	<div class ='col-xs-12 bg-highlight' >
 
 		<form name = "itemForm">
-					<div >SHORTNAME
+					<div ng-hide = "copy.image">SHORTNAME
 						<input type="text" class ="form-control" id="{{copy.shortname}}" placeholder="{{copy.shortname}}" ng-model="copy.shortname">
 					</div>
-					<div >SUMMARY OF CONDITION
+					<div ng-hide = "copy.image">SUMMARY OF CONDITION
 						<input type="text" class ="form-control" id="{{copy.summary}}" placeholder="{{copy.summary}}" ng-model="copy.summary">
 					</div>
-					<div >SYMPTOMS
+					<div ng-hide = "copy.image">SYMPTOMS
 						<input type="text" class ="form-control" id="{{copy.symptoms}}" placeholder="{{copy.symptoms}}" ng-model="copy.symptoms">
 					</div>
-					<div >SIGNS
+					<div ng-hide = "copy.image">SIGNS
 						<input type="text" class ="form-control" id="{{copy.signs}}" placeholder="{{copy.signs}}" ng-model="copy.signs">
 					</div>
-					<div >WHEN TO ADMIT
+					<div ng-hide = "copy.image">WHEN TO ADMIT
 						<input type="text" class ="form-control" id="{{copy.admit}}" placeholder="{{copy.admit}}" ng-model="copy.admit">
 					</div>
-					<div >WHAT TO DO
+					<div ng-hide = "copy.image">WHAT TO DO
 					<textarea class="form-control" rows = "4" id="{{copy.required}}" placeholder="{{copy.required}}" ng-model="copy.required">
 						</textarea>
 					</div>
-					<div >RED FLAGS
+					<div ng-hide = "copy.image">RED FLAGS
 						<textarea rows="4" class ="form-control" id="{{copy.flags}}" placeholder="{{copy.flags}}" ng-model="copy.flags">
 						</textarea>
 					</div>
-					<br>
+					<div ng-show = "copy.image" >IMAGE:	{{copy.image}}
+					<div ng-show = "copy.image" ng-repeat = "item in copy.src track by $index">
+						SRC {{$index +1}}
+						<br>
+					<input type = "text" class = "form-control"  ng-model = "copy.src[$index]">
+					</div>
 
-			<div class='form-group'>
+					</div>
+					<br>
+			<!-- need to hide all of this and implement a list of image titles for the array if there is an image flag.. needs implementing-->
+
+			<div class='form-group' ng-hide = "copy.image">
 				<button type = 'button' class ='btn btn-success btn-lg btn-block' ng-click='save()'>
 					<span class ='glyphicon glyphicon-ok'></span>
 					Save
+				</button>
+			</div>
+			<div class='form-group' ng-show = "copy.image">
+				<button type = 'button' class ='btn btn-info btn-lg btn-block' ng-click='addImageSection()'>
+					<span class ='glyphicon glyphicon-ok'></span>
+					Add New Image
+				</button>
+			</div>
+			<div class='form-group' ng-show = "copy.image">
+				<button type = 'button' class ='btn btn-success btn-lg btn-block' ng-click='saveImage()'>
+					<span class ='glyphicon glyphicon-ok'></span>
+					Save Images
 				</button>
 			</div>
 			<div class='form-group'>

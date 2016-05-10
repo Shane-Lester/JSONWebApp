@@ -9,6 +9,7 @@ angular.module('JSONApp')
     var home = ''
     var suffix = '.json'
     $scope.success = ''
+    $scope.specialty = 'ent'
 
     $scope.showContent = function ($fileContent) {
       var data = JSON.parse($fileContent)
@@ -64,6 +65,15 @@ angular.module('JSONApp')
       }
     }
 
+    $scope.addNewImage = function () {
+      if ($scope.newImageItem.trim().length < 1) {
+        $state.go(home)
+      } else {
+        Items.createNewImage($scope.newImageItem, state)
+        $scope.newImageItem = ''
+      }
+    }
+
     // manage the menu items
 
     $scope.remove = function (index) {
@@ -80,7 +90,7 @@ angular.module('JSONApp')
 
     $scope.loadData = function () {
       $('#loadingButton').html('LOADING')
-      var address = 'http://www.' + $scope.address
+      var address = 'http://www.' + $scope.address + '/' + $scope.specialty
       if (state == 'department') {
         address += '/docs/department.json'
       }
@@ -197,6 +207,38 @@ angular.module('JSONApp')
       $state.go(home)
     }
 
+    $scope.saveImage = function () {
+      console.log('saving the image')
+      if (state == 'department') {
+        console.log('save Image department')
+        $scope.sourceData.department[$scope.id].data = angular.copy($scope.copy.data)
+        $scope.sourceData.department[$scope.id].title = angular.copy($scope.copy.title)
+        $scope.sourceData.department[$scope.id].src = angular.copy($scope.copy.src)
+
+      // department saving
+      // $scope.copy.data[2] should hold the src array
+      } else {
+        // clinical data saving - need to copy the data item by item into the array
+        // $scope.sourceData points to the array in memory in the Items service
+        console.log('clinical data')
+        console.log($scope.copy.src)
+
+        $scope.sourceData.clinical[$scope.id].title = angular.copy($scope.copy.title)
+        $scope.sourceData.clinical[$scope.id].image = angular.copy($scope.copy.image)
+
+        $scope.sourceData.clinical[$scope.id].src = angular.copy($scope.copy.src)
+      }
+      $state.go(home)
+    }
+
+    $scope.addImageSection = function () {
+      if (state == 'clinical') {
+        $scope.copy.src.push('')
+      } else {
+        $scope.copy.data[0].src.push('')
+      }
+    }
+
     $scope.addSection = function () {
       $scope.copy.data.push({
         'title': ''
@@ -247,6 +289,19 @@ angular.module('JSONApp')
 
           reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0])
         })
+      }
+    }
+  })
+
+  // from http://stackoverflow.com/questions/16388562/angularjs-force-uppercase-in-textbox
+  .directive('lowercased', function () {
+    return {
+      require: 'ngModel',
+      link: function (scope, element, attrs, modelCtrl) {
+        modelCtrl.$parsers.push(function (input) {
+          return input ? input.toLowerCase() : ''
+        })
+        element.css('text-transform', 'lowercase')
       }
     }
   })

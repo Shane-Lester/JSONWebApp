@@ -449,6 +449,26 @@ angular.module('JSONApp')
       }
     }
 
+    service.createNewImage = function (title, state) {
+      // passes the title in from the scope to be then used by the edit controller
+      newTitle = title
+      var newItem = {}
+      if (state == 'department') {
+        newItem = {
+          'title': title,
+          'data': [{'image': true}, {'src': ['']}]
+        }
+        service.entries.department.push(newItem)
+      } else {
+        newItem = {
+          title: newTitle,
+          image: true,
+          src: ['']
+        }
+        service.clinicalEntries.clinical.push(newItem)
+      }
+    }
+
     service.getNew = function () {
       // return title to the edit controller
       return newTitle
@@ -508,12 +528,12 @@ angular.module('JSONApp')
         var a = document.createElement('a')
         a.download = 'department.json'
         a.href = url
-        a.textContent = 'Download department.json'
+        a.textContent = 'Click here to download department.json'
       } else {
         var a = document.createElement('a')
         a.download = 'clinical.json'
         a.href = url
-        a.textContent = 'Download clinical.json'
+        a.textContent = 'Click here to download clinical.json'
       }
 
       return a
