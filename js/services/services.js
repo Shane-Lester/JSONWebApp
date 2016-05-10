@@ -281,7 +281,13 @@ angular.module('JSONApp')
           'data': [
             {'item': 'You will be excused from your duties to attend any mandatory teaching i.e. GP teaching, foundation programme generic skills as long as there are enough doctors to cover the department in your absence. Please ensure that you discuss the dates in plenty of time with Satpal Singh.<br><br>There is regular on the job teaching in the assigned casualty clinic teaching sessions. We also have ad hoc departmental teaching at lunch times.<br><br>Sit in outpatient clinics and theatre sessions will also provide valuable teaching.<br><br>There is a clinical governance meeting on a bi-annual basis that has compulsory attendance if you are on duty.<br><br>We encourage all our first tier doctors to get involved in audit and research. Please discuss with your clinical/educational supervisor at your induction meeting. All clinical audit registration forms should be sent to Miss Blackmore.'},
             {'item': '<br>'}
+        ]},
+        {'title': 'timetable',
+          'data': [
+            {'image':  true},
+            {'src': ['image.jpg']}
         ]}
+
 
       ]
     }

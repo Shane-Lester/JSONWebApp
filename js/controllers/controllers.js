@@ -176,6 +176,10 @@ angular.module('JSONApp')
         $scope.copy.title = $scope.object.title
       // console.log($scope.copy)
       }
+      if($scope.copy.data[0].image){
+        console.log('an image file')
+        $scope.isAnImage = true;
+      }
     }
 
     $scope.cancel = function () {
@@ -235,7 +239,7 @@ angular.module('JSONApp')
       if (state == 'clinical') {
         $scope.copy.src.push('')
       } else {
-        $scope.copy.data[0].src.push('')
+        $scope.copy.data[1].src.push('')
       }
     }
 
