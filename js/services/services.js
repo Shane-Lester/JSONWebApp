@@ -425,7 +425,7 @@ angular.module('JSONApp')
         },
         {'title': 'Laryngectomy Valve Pathway',
           'image': true,
-          'src': ['img/page0001.jpg', 'img/page0002.jpg']
+          'src': ['page1.jpg', 'page2.jpg','page3.jpg','page4.jpg']
 
         }
 

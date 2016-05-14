@@ -165,9 +165,13 @@ angular.module('JSONApp')
         $scope.copy = []
         _.extend($scope.copy, $scope.object)
         $scope.copy.title = $scope.object.title
+        if($scope.copy.data[0].image){
+          console.log('an image file')
+          $scope.isAnImage = true;
+        }
       } else {
         $scope.object = angular.copy($scope.sourceData.clinical[$scope.id])
-        // console.log($scope.object)
+        console.log($scope.object)
 
         // $scope.object is an object - make a deep copy to work on
 
@@ -175,11 +179,12 @@ angular.module('JSONApp')
         _.extend($scope.copy, $scope.object)
         $scope.copy.title = $scope.object.title
       // console.log($scope.copy)
-      }
-      if($scope.copy.data[0].image){
+      if($scope.copy.image){
         console.log('an image file')
         $scope.isAnImage = true;
       }
+      }
+
     }
 
     $scope.cancel = function () {
