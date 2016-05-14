@@ -171,7 +171,7 @@ angular.module('JSONApp')
         }
       } else {
         $scope.object = angular.copy($scope.sourceData.clinical[$scope.id])
-        console.log($scope.object)
+        // console.log($scope.object)
 
         // $scope.object is an object - make a deep copy to work on
 
