@@ -530,19 +530,25 @@ angular.module('JSONApp')
       })
       var url = URL.createObjectURL(blob)
 
-      if (state == 'department') {
-        var a = document.createElement('a')
-        a.download = 'department.json'
-        a.href = url
-        a.textContent = 'Click here to download department.json'
-      } else {
-        var a = document.createElement('a')
-        a.download = 'clinical.json'
-        a.href = url
-        a.textContent = 'Click here to download clinical.json'
+      // if (state == 'department') {
+      //   var a = document.createElement('a')
+      //   a.download = 'department.json'
+      //   a.href = url
+      //   a.textContent = 'Click here to download department.json'
+      // } else {
+      //   var a = document.createElement('a')
+      //   a.download = 'clinical.json'
+      //   a.href = url
+      //   a.textContent = 'Click here to download clinical.json'
+      // }
+      //
+      // return a
+      if(state == 'department'){
+        saveAs(blob,"department.json");
       }
-
-      return a
+      else{
+        saveAs(blob,'clinical.json');
+      }
     }
 
     return service
